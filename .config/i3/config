@@ -9,6 +9,7 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
+# Mod4 is Win, Mod1 is Alt
 set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -24,7 +25,9 @@ font pango:DejaVu Sans Mono 14
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id "xss-lock --transfer-sleep-lock -- /home/keithl/.config/i3/i3lockconfig --nofork"
+
+#exec_always --no-startup-id "mpv ~/dababy.mp3"
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
@@ -70,6 +73,7 @@ bindsym $mod+d exec rofi -show run
 bindsym $mod+a exec rofi -show window
 bindsym $mod+c exec rofi -show calc -modi
 bindsym $mod+e exec rofimoji
+bindsym $mod+i exec firefox --new-window chat.openai.com
 
 # change focus
 bindsym $mod+h focus left
@@ -125,16 +129,17 @@ bindsym $mod+space focus mode_toggle
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "1"
 set $ws2 "2"
+set $ws3 "3"
 set $ws4 "4"
 set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"
-set $ws3 "3"
-set $ws10 "10"
+set $ws8 "8"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "🚂"
+set $ws11 "💬"
 set $ws12 "📻"
-set $ws11 "11"
-set $ws8 "🚂"
-set $ws9 "💬"
 
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
@@ -281,7 +286,7 @@ bindsym XF86MonBrightnessDown exec --no-startup-id cat /sys/class/backlight/inte
 #i3 lock config
 bindsym $mod+shift+x exec ~/.config/i3/i3lockconfig
 #exec --no-startup-id xautolock -time 10 -locker 'i3lock -d -c 000000'
-exec --no-startup-id xautolock -time 15 -locker '~/.config/i3/i3lockconfig'
+exec --no-startup-id xautolock -time 60 -locker '~/.config/i3/i3lockconfig'
 #exec --no-startup-id xautolock -time 30 -locker 'systemctl suspend'
 
 #brave command
@@ -299,11 +304,6 @@ bindsym $mod+F1 exec pavucontrol
 #exec --no-startup-id mpg123 -a hw:2 ~/Music/dababy.mp3
 
 #programs to workspaces
-
-#for_window [class="Spotify"] move to output DisplayPort-3
+for_window [class="Steam"] move to workspace $ws10
+for_window [class="Signal Beta"] move to workspace $ws11
 for_window [class="Spotify"] move to workspace $ws12
-for_window [class="Steam"] move to workspace $ws8
-for_window [class="Civ6Sub"] move to workspace $ws8
-for_window [class="justcause3.exe"] move to workspace $ws8
-assign [class="E.runloop"] -> output DisplayPort-1
-for_window [class="gta5.exe"] move to workspace $ws8
